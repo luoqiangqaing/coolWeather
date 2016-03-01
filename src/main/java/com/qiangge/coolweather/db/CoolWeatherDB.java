@@ -103,6 +103,7 @@ public class CoolWeatherDB {
     //从数据库中读取某城市下所有的县的信息
     public List<Country> loadCounties (int cityId){
         List<Country> list = new ArrayList<Country>();
+        //Cursor cursor = db.query("Country",null,"city_id = ?",new String[]{String.valueOf(cityId)},null,null,null);
         Cursor cursor = db.query("Country",null,"city_id = ?",new String[]{String.valueOf(cityId)},null,null,null);
         if(cursor.moveToFirst()){
             do{
@@ -111,6 +112,7 @@ public class CoolWeatherDB {
                 country.setCountryCode(cursor.getString(cursor.getColumnIndex("country_code")));
                 country.setCountryName(cursor.getString(cursor.getColumnIndex("country_name")));
                 country.setCityId(cityId);
+                list.add(country);
             }while (cursor.moveToNext());
         }
         if(cursor !=null){
